@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
+import numpy as np
 
 # załadowanie danych
 iris = load_iris()
@@ -17,11 +18,23 @@ X_test_scaled = scaler.transform(X_test)
 # print(X_test)
 # print(X_test_scaled)
 
-for k in range(1,51):
+k_range = range(1,51)
+scores = []
+for k in k_range:
     knn = KNeighborsClassifier(n_neighbors=k)
     knn.fit(X_train_scaled, y_train)
+    scores.append(knn.score(X_test_scaled, y_test))
 
-    y_pred = knn.predict(X_test_scaled)
+# print(scores)
 
-    score = accuracy_score(y_test, y_pred)
-    print(f"Dokładność modelu przy {k} sąsiadach: {score:.4f} ({score * 100:.2f}%)")
+optimal_k = k_range[np.argmax(scores)]
+print(f"Optymalne k: {optimal_k}")
+print(f"Największa dokłądność: {max(scores)}")
+
+
+
+
+    # y_pred = knn.predict(X_test_scaled)
+    #
+    # score = accuracy_score(y_test, y_pred)
+    # print(f"Dokładność modelu przy {k} sąsiadach: {score:.4f} ({score * 100:.2f}%)")
