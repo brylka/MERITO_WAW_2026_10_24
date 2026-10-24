@@ -26,12 +26,6 @@ for k in k_range:
     knn.fit(X_train_scaled, y_train)
     scores.append(knn.score(X_test_scaled, y_test))
 
-# print(scores)
-
-optimal_k = k_range[np.argmax(scores)]
-print(f"Optymalne k: {optimal_k}")
-print(f"Największa dokłądność: {max(scores)}")
-
 plt.figure(figsize=(15, 10))
 plt.plot(k_range, scores, marker='o')
 plt.title("Dokładność modelu dla różnych warości k")
@@ -40,10 +34,15 @@ plt.ylabel("Dokładność")
 plt.grid(True)
 plt.show()
 
+optimal_k = k_range[np.argmax(scores)]
+print(f"Optymalne k: {optimal_k}")
+print(f"Największa dokłądność: {max(scores)}")
 
 
+knn_clasifier = KNeighborsClassifier(n_neighbors=optimal_k)
+knn_clasifier.fit(X_train_scaled, y_train)
 
-    # y_pred = knn.predict(X_test_scaled)
-    #
-    # score = accuracy_score(y_test, y_pred)
-    # print(f"Dokładność modelu przy {k} sąsiadach: {score:.4f} ({score * 100:.2f}%)")
+y_pred = knn_clasifier.predict(X_test_scaled)
+
+score = accuracy_score(y_test, y_pred)
+print(f"Dokładność modelu przy {optimal_k} sąsiadach: {score:.4f} ({score * 100:.2f}%)")
