@@ -4,6 +4,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 import numpy as np
+import matplotlib.pyplot as plt
 
 # załadowanie danych
 iris = load_iris()
@@ -18,7 +19,7 @@ X_test_scaled = scaler.transform(X_test)
 # print(X_test)
 # print(X_test_scaled)
 
-k_range = range(1,51)
+k_range = range(1,105)
 scores = []
 for k in k_range:
     knn = KNeighborsClassifier(n_neighbors=k)
@@ -30,6 +31,14 @@ for k in k_range:
 optimal_k = k_range[np.argmax(scores)]
 print(f"Optymalne k: {optimal_k}")
 print(f"Największa dokłądność: {max(scores)}")
+
+plt.figure(figsize=(15, 10))
+plt.plot(k_range, scores, marker='o')
+plt.title("Dokładność modelu dla różnych warości k")
+plt.xlabel("Wartość k")
+plt.ylabel("Dokładność")
+plt.grid(True)
+plt.show()
 
 
 
