@@ -2,6 +2,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+import matplotlib.pyplot as plt
+from sklearn import tree
 
 # załadowanie danych
 iris = load_iris()
@@ -23,6 +25,12 @@ print(f"Dokładność modelu: {score:.4f} ({score * 100:.2f}%)")
 
 print(classification_report(y_test, y_pred, target_names=iris.target_names))
 
+plt.figure(figsize=(15, 15))
+tree.plot_tree(dt_classifier,
+               feature_names=iris.feature_names,
+               class_names=iris.target_names,
+               filled=True)
+plt.show()
 
 # print(y_test)
 # print(y_pred)
