@@ -17,10 +17,11 @@ X_test_scaled = scaler.transform(X_test)
 # print(X_test)
 # print(X_test_scaled)
 
-knn = KNeighborsClassifier(n_neighbors=3)
-knn.fit(X_train_scaled, y_train)
+for k in range(1,51):
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train_scaled, y_train)
 
-y_pred = knn.predict(X_test_scaled)
+    y_pred = knn.predict(X_test_scaled)
 
-score = accuracy_score(y_test, y_pred)
-print(f"Dokładność modelu: {score:.4f} ({score * 100:.2f}%)")
+    score = accuracy_score(y_test, y_pred)
+    print(f"Dokładność modelu przy {k} sąsiadach: {score:.4f} ({score * 100:.2f}%)")
