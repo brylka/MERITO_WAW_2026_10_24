@@ -14,9 +14,10 @@ def index():
         # print(sl,sw,pl,pw)
         sample = [[sl, sw, pl, pw]]
         # print(sample)
-        predict = model.predict(sample)
+        predict = model.predict(sample)[0]
         print(predict)
-    return render_template("index.html")
+
+    return render_template("index.html", predict=predict)
 
 if __name__ == "__main__":
     app.run(debug=True)
