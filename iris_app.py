@@ -6,6 +6,7 @@ model = joblib.load("model.joblib")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    predict = None
     if request.method == "POST":
         sl = float(request.form["sl"])
         sw = float(request.form["sw"])
@@ -15,7 +16,7 @@ def index():
         sample = [[sl, sw, pl, pw]]
         # print(sample)
         predict = model.predict(sample)[0]
-        print(predict)
+        # print(predict)
 
     return render_template("index.html", predict=predict)
 
