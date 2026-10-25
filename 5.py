@@ -1,9 +1,11 @@
 from sklearn.cluster import KMeans
-from sklearn.datasets import make_blobs
+from sklearn.datasets import make_blobs, make_moons
 import matplotlib.pyplot as plt
 from sklearn.metrics import silhouette_score
 
-X_blobs, y_true = make_blobs(n_samples=300, centers=4, cluster_std=0.6, random_state=42)
+#X_blobs, y_true = make_blobs(n_samples=300, centers=4, cluster_std=0.6, random_state=42)
+X_blobs, y_true = make_moons(n_samples=300, noise=0.05, random_state=42)
+
 
 inertias = []
 silhouette_scores = []
@@ -26,7 +28,7 @@ for k in K_range:
 # plt.show()
 
 
-optimal_k = 4
+optimal_k = 2
 kmeans = KMeans(n_clusters=optimal_k, random_state=42)
 y_kmeans = kmeans.fit_predict(X_blobs)
 
