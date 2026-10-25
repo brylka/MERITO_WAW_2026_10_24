@@ -13,11 +13,8 @@ def index():
         sw = float(request.form["sw"])
         pl = float(request.form["pl"])
         pw = float(request.form["pw"])
-        # print(sl,sw,pl,pw)
         sample = [[sl, sw, pl, pw]]
-        # print(sample)
         predict = model.predict(sample)[0]
-        # print(predict)
         result = target_names[predict]
 
     return render_template("index.html", predict=predict, result=result)
