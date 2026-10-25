@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
+import joblib
 
 app = Flask(__name__)
+model = joblib.load("model.joblib")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -11,7 +13,9 @@ def index():
         pw = float(request.form["pw"])
         # print(sl,sw,pl,pw)
         sample = [[sl, sw, pl, pw]]
-        print(sample)
+        # print(sample)
+        predict = model.predict(sample)
+        print(predict)
     return render_template("index.html")
 
 if __name__ == "__main__":
