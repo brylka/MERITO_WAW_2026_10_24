@@ -14,7 +14,7 @@
         <button>Predykcja</button>
     </form>
     {% if predict in [0,1,2] %}
-        <p>Gatunek: {{ predict }}</p>
+        <p>Gatunek: {{ result }} ({{ predict }})</p>
     {% endif %}
 </body>
 </html>
